@@ -1,0 +1,153 @@
+:root {
+    --light: #c2ecf7;
+    --dark: #232D4B; 
+    --card_light: white;
+    --card_dark:rgb(112, 110, 107);
+    --card_text_light: white;
+    --navbar-light: #E57200;
+    --navbar-dark:#554f3d;
+    --footer-text-light: white;
+    --footer-text-dark: black;
+    --footer-light: white;
+    --footer-dark:#554f3d;
+}
+
+html[data-theme = "light"] {
+    --dark: #c2ecf7;
+    --light:#232D4B; 
+    --card_light: rgb(112, 110, 107);
+    --card_dark:white;
+    --navbar-light: #554f3d;
+    --navbar-dark:#E57200;
+    --footer-text-light: black;
+    --footer-text-dark: white;
+    --footer-light: #554f3d;
+    --footer-dark:white;
+}
+
+html, body {
+    background: var(--dark);
+    color: var(--light);
+}
+.navbar-text-light {
+    color: var(--navbar-text-light);
+}
+
+.navbar-text-dark {
+    color: var(--navbar-text-dark);
+}
+
+.navbar-light {
+    background-color: var(--navbar-light);
+}
+
+.navbar-dark {
+    background-color: var(--navbar-dark);
+}
+
+.footer-dark {
+    background-color: var(--footer-dark);
+}
+
+.footer-light {
+    background-color: var(--footer-light);
+}
+
+.footer-text-dark {
+    color: var(--footer-text-dark);
+}
+
+.footer-text-light {
+    color: var(--footer-text-light);
+}
+
+.card-bg-light {
+    background: var(--card_dark);
+}
+
+.card-bg-dark {
+    background: var(--card_light);
+}
+
+.light-text {
+    color: var(--light);
+}
+
+.dark-text {
+    color: var(--dark);
+}
+
+.light_bg {
+    background-color: var(--dark);
+}
+
+.dark_bg {
+    background-color: var(--light);
+}
+
+
+.jumbotron-fluid{
+    text-align: center;
+    padding-top: 5vh;
+    padding-bottom: 10vh;
+    background-color: aliceblue;
+}
+
+.card-img-top {
+    height: 12rem;
+}
+
+.btn-link {
+    text-decoration: none;
+    color:black;
+}
+.navbar-dark .navbar-nav .nav-link{
+   color:black;
+}
+.navbar-dark .navbar-brand {
+    color:black;
+}
+.faq {
+    background-color: aliceblue;
+}
+
+.mystyle input[type="description"] {
+   height: 10vh;
+   font-size: 10px;
+   line-height: 14px;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+    color:#FFFF
+    
+}
+.text-muted{
+    color:black !important ;
+}
+
+.searchheader {
+    background-image: url("./images/rotundasunset.jpg");
+    background-repeat: no-repeat;
+    background-position-x:center;
+    background-size:cover;
+    background-position-y:70%;
+    color:whitesmoke;
+    font-weight:900;
+    text-shadow: 2px;
+    height: 40vh;
+}
+.txtoutline
+{
+    color: white;
+    text-shadow:
+    -1px -1px 0 rgb(83, 82, 82),
+    1px -1px 0 rgb(83, 82, 82),
+    -1px 1px 0 rgb(83, 82, 82),
+    1px 1px 0 rgb(83, 82, 82);  
+}
+
+.display-4 {
+    font-family: 'Staatliches', cursive;
+}

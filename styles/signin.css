@@ -1,0 +1,73 @@
+*{
+    font-family: Playfair Display;
+}
+html, body, .viewport {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+.title {
+    font-size: 1000px;
+}
+/* LEFT CONTAINER */
+.left-container{
+    flex: 50%;
+    background: linear-gradient(180deg, #232D4B 42%, rgba(35, 45, 75, 0) 100%);
+    text-align: center;
+    
+}
+.left-container .title{
+    color:#E57200;
+    font-size: 70px;
+    line-height: 96px;
+    
+}
+.left-container img{
+    margin: 5%;
+    height: 100px;
+    widows: inherit;
+}
+/* GOOGLE LOGIN BUTTON */
+.left-container button{
+    background:url(images/btn_google_signin_light_normal_web.png); 
+    background-size: cover; 
+    width: 200px;
+    height: 50px;
+    margin-top:10%;
+    border:none;
+    outline: none;
+}
+.left-container button:hover{
+    background:url(images/btn_google_signin_light_focus_web.png); 
+    background-size: cover; 
+}
+.left-container button:active{
+    background:url(images/btn_google_signin_light_pressed_web.png);
+    background-size: cover; 
+}
+
+/* Divided slant */
+.slanted {
+    -webkit-clip-path: polygon(100% 0, 0 0, 0% 100%,100% 0);
+    clip-path: polygon(100% 0, 100% 100%, 50% 100%, 0 0%);
+    background-image: url("images/rotunda.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height:100%;
+    width:100%;
+}
+/* RIGHT CONTAINER */
+.right-container{
+    flex:50%;
+    background: linear-gradient(180deg, #232D4B 42%, rgba(35, 45, 75, 0) 100%);
+}
