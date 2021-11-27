@@ -4,7 +4,7 @@ $dbusername = "root";
 $dbpasswd = "";
 $dbname = "hooshitchhiking";
 
-$clientID = '442159528554-f11452a77u4n3vi56msv8sff6b2t28bc.apps.googleusercontent.com';
-$clientSecret = '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';
-$redirectUri = 'http://localhost/HoosHitchHiking/signin/';
+$clientID = '964712926733-im1ofie9kut3iq6a46rmh94atis7a18b.apps.googleusercontent.com';
+$clientSecret = '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';
+$redirectUri = 'http://localhost/hooshanging/signin/';
 ?>
