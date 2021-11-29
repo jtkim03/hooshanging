@@ -1,7 +1,7 @@
 <?php include("base.php")?>
     <!--Create Post form-->
     <h1 class = "display-4" style = "text-align: center; margin-top: 4vh; margin-bottom: 4vh;">
-        Create a Post
+        Create aewa
     </h1>
     <div class = "container">
         <div class="row justify-content-md-center">
@@ -10,10 +10,13 @@
                 <div class = "row" style = "text-align: center;">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" style = "text-align: center;">
                         <label class="btn btn-secondary active">
-                            <input type="radio" name="requestOrOffer" id="request" value ="request" autocomplete="off" checked> Request
+                            <input type="radio" name="requestOrOffer" id="request" value ="request" autocomplete="off" checked> Party
                         </label>
                         <label class="btn btn-secondary">
-                            <input type="radio" name="requestOrOffer" id="offer" value ="offer" autocomplete="off"> Offer
+                            <input type="radio" name="requestOrOffer" id="offer" value ="offer" autocomplete="off"> Study Group
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="requestOrOffer" id="offer" value ="offer" autocomplete="off"> Club Event
                         </label>
                     </div>
                     </div>

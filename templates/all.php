@@ -3,15 +3,20 @@
     <h1 class = "display-4" style = "text-align: center; margin-top: 4vh; margin-bottom: 4vh; font-family: 'Staatliches', cursive;">
         All posts
     </h1>
-    <table class="table" id=allpost_table>
+    <div class = "container">
+    <table class="table table-hover" id=allpost_table>
+        <thead>
             <tr>
-                <th>Destination</th>
+                <th>Title</th>
+                <th>Location</th>
                 <th>Date and Time</th>
                 <th>Description</th>
             </tr>
+        </thead>
             <tbody id="mypost_data">
             </tbody> 
-        </table> 
+    </table> 
+    </div>
     <div class="container" id=allpost_row>
         <div class="row no-gutters" style = "margin: 40px 0 20px">
           </div>
@@ -148,6 +153,10 @@
     </div>
     </div>
     <script>
+    const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }
+    return new Date(dateString).toLocaleDateString(undefined, options)
+    }
     var ajax=new XMLHttpRequest();
     var method="GET";
     var path="allPostQuery.php";
@@ -170,7 +179,7 @@
     });
     function displayAllPost(posts){
         var table = document.getElementById("allpost_table");
-        table.removeChild(table.getElementsByTagName("tbody")[0]);
+        //table.removeChild(table.getElementsByTagName("tbody")[0]);
         var body = document.createElement("tbody");
         for(var i = 0; i < posts.length; i++) {
             var post = posts[i];
@@ -178,11 +187,15 @@
             var th = document.createElement("th"); 
 
             var destination = document.createElement("td");
-            var property_text = document.createTextNode(post.destination);
+            var property_text = document.createTextNode(post.title);
+            destination.appendChild(property_text);
+            row.appendChild(destination);
+            var destination = document.createElement("td");
+            var property_text = document.createTextNode(post.event_address);
             destination.appendChild(property_text);
             row.appendChild(destination);
             var date = document.createElement("td");
-            var property_text = document.createTextNode(post.datetime);
+            var property_text = document.createTextNode(formatDate(post.event_datetime));
             date.appendChild(property_text);
             row.appendChild(date);
             var descrip = document.createElement("td");
@@ -192,8 +205,8 @@
             body.appendChild(row);
         }
         table.appendChild(body);
-}
+    }
 
 
-</script>
+    </script>
     <?php include("footer.php")?>

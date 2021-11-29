@@ -4,7 +4,7 @@ class HHController {
 
     private $db;
     
-    private $url = "/HoosHitchHiking";
+    private $url = "/hooshanging";
 
     //will have instance of database object
     public function __construct() {
@@ -17,7 +17,7 @@ class HHController {
                 $this->updateProfile();
                 break;
             case "get_mypost":
-                include("myPostQuery.php");
+                $this->getMyPost();
                 break;
             case "get_allpost":
                 include("allPostQuery.php");
@@ -93,28 +93,25 @@ class HHController {
                 $regex="<[a-z][a-z][a-z]?[0-9][a-z][a-z]?[a-z]?@virginia.edu>";
                 if(preg_match($regex,$email)){
                                 // checking user already exists or not
-                    $get_user = mysqli_query($db_connection, "SELECT `email` FROM `students` WHERE `email`='$email'");
+                    $get_user = mysqli_query($db_connection, "SELECT `email` FROM `appuser` WHERE `email`='$email'");
                     if(mysqli_num_rows($get_user) > 0){
                         //retrieve user data
-                        $stmt = $this->db->mysqli->prepare("select * from students where email = ?;");
+                        $stmt = $this->db->mysqli->prepare("select * from appuser where email = ?;");
                         $stmt->bind_param("s", $email);
                         $stmt->execute();
                         $res = $stmt->get_result();
                         $data = $res->fetch_all(MYSQLI_ASSOC);
                         $_SESSION['email'] = $email; 
                         $_SESSION['name'] = $full_name;
-                        $_SESSION["loc"] = $data[0]["loc"];
-                        $_SESSION["car_desc"] = $data[0]["car_desc"];
-                        $_SESSION["contact"] = $data[0]["contact"];
     
-                        header('Location: /HoosHitchHiking/home');
+                        header('Location: /hooshanging/home');
                         return;
     
                     }
                     else{
     
                         // if user not exists we will insert the user
-                        $insert = mysqli_query($db_connection, "INSERT INTO `students`(`name`,`email`) VALUES('$full_name','$email')");
+                        $insert = mysqli_query($db_connection, "INSERT INTO `appuser`(`name`,`email`) VALUES('$full_name','$email')");
     
                         if($insert){
                             $_SESSION['email'] = $email;
@@ -123,7 +120,7 @@ class HHController {
                             $_SESSION["car_desc"] ="";
                             $_SESSION["contact"] ="";
     
-                            header('Location: /HoosHitchHiking/home');
+                            header('Location: /hooshanging/home');
                             return;
                         }
                         else{
@@ -135,7 +132,7 @@ class HHController {
                 else{
                     $error_msg="Must be a UVA student!";
                     $_SESSION['error']="<div class='alert alert-danger'style = 'margin:0;'><b>Error: $error_msg </b></div>";
-                    header('Location: /HoosHitchHiking/home');
+                    header('Location: /hooshanging/home');
                 }
     
             }
@@ -146,7 +143,7 @@ class HHController {
     
     public function updateProfile() {
         if ($_POST["name"] != "" || $_POST["contact"] != "" || $_POST["loc"] != "" || $_POST["car_desc"] != "" ) {
-            $stmt = $this->db->mysqli->prepare("update students set
+            $stmt = $this->db->mysqli->prepare("update appuser set
                                 name = ?,
                                 contact = ?,
                                 loc = ?,
@@ -176,9 +173,7 @@ class HHController {
 
 }
     public function getMyPost(){
-
-        $stmt=$mysqli->prepare("select * from post where email=?");
-        $stmt->bind_param("s",$_SESSION["email"]);
+        $stmt=$mysqli->prepare("select * from event_description");
         if(!$stmt->execute()){
             echo "Error";
         }
@@ -187,7 +182,7 @@ class HHController {
         echo json_encode($posts);
     }
     public function getAllPost(){
-        $data = $this->db->mysqli->query("select * from post;");
+        $data = $this->db->mysqli->query("select * from event_occurance;");
         if (!isset($data[0])) {
             die("No posts in the database");
         }
@@ -196,16 +191,32 @@ class HHController {
         echo json_encode($post,JSON_PRETTY_PRINT);
     }
     public function createPost(){
+
         $post_details = array('email' => $_SESSION["email"],
-                            'destination' => $_POST["destination"], 
+                            'title' => $_POST["title"],
+                            'location' => $_POST["location"], 
                             'datetime' => $_POST["datetime"], 
                             'description' => $_POST["description"],
                             'requestOrOffer' => $_POST['requestOrOffer']
                         );
         // $data=json_decode(json_encode($post_details),true);
         // print_r($data);
-        $stmt = $this->db->mysqli->prepare("insert into post (email,destination, datetime, description, type) values (?,?,?,?,?);");
-        $stmt->bind_param("sssss",$post_details["email"],$post_details["destination"],$post_details["datetime"],$post_details["description"],$post_details["requestOrOffer"]);
+        #$this->db->query("insert into event_host (email, host_name) values (?, ?);");
+        $stmt = $this->db->mysqli->prepare("insert into event_address (host_name, event_address) values (?,?);");
+        $stmt->bind_param("ss",$_SESSION["name"],$post_details["location"]);
+        $stmt->execute();
+
+        $stmt = $this->db->mysqli->prepare("insert into event_occurance(title, event_datetime) values (?,?);");
+        $stmt->bind_param("ss",$post_details["title"], $post_details["datetime"]);
+        $stmt->execute();
+
+        $stmt = $this->db->mysqli->prepare("insert into event_description(title, email, description) values (?,?,?);");
+        $stmt->bind_param("sss",$post_details["title"], $_SESSION["email"], $post_details["description"]);
+        $stmt->execute();
+
+        $stmt = $this->db->mysqli->prepare("insert into creates(email) values (?);");
+        $stmt->bind_param("s",$post_details["email"]);
+
         if(!$stmt->execute()){
             echo "Error";
         }

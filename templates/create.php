@@ -12,20 +12,27 @@
                 <div class = "row" style = "text-align: center;">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" style = "text-align: center;">
                         <label class="btn btn-secondary active">
-                            <input type="radio" name="requestOrOffer" id="request" value ="request" autocomplete="off" checked> Request
+                            <input type="radio" name="requestOrOffer" id="request" value ="request" autocomplete="off" checked> Party
                         </label>
                         <label class="btn btn-secondary">
-                            <input type="radio" name="requestOrOffer" id="offer" value ="offer" autocomplete="off"> Offer
+                            <input type="radio" name="requestOrOffer" id="offer" value ="offer" autocomplete="off"> Study Group
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="requestOrOffer" id="offer" value ="offer" autocomplete="off"> Club Event
                         </label>
                     </div>
                     </div>
                     <div class="form-group">
-                    <label for="destination">Destination</label>
-                        <input type="text" class="form-control" id="destination" name = "destination" aria-describedby="emailHelp" placeholder="Enter event name">
+                    <label for="location">Event Title</label>
+                        <input type="text" class="form-control" id="title" name = "title" aria-describedby="emailHelp" placeholder="Enter event name">
+                    </div>
+                    <div class="form-group">
+                    <label for="location">Event Location</label>
+                        <input type="text" class="form-control" id="location" name = "location" aria-describedby="emailHelp" placeholder="Enter event address">
                         <div id = "destinationHelp" class = "form-text"></div>
                     </div>
                     <div class="form-group">
-                        <label for="datetime">Date and Time of Departure</label>
+                        <label for="datetime">Date and Time</label>
                         <input type="datetime-local" class = "form-control" id="datetime" name="datetime" name="meeting-time">
                     </div>
                     <div class="form-group">

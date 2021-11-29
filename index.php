@@ -13,7 +13,7 @@ spl_autoload_register(function($classname){
     include "classes/$classname.php";
 });
 $path = parse_url($_SERVER["REQUEST_URI"],PHP_URL_PATH);
-$path = str_replace("/HoosHitchHiking/","",$path);
+$path = str_replace("/hooshanging/","",$path);
 $parts = explode("/",$path);
 
 session_start(); 
