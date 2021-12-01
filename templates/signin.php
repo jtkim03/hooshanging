@@ -22,7 +22,7 @@ Sources used: https://cs4640.cs.virginia.edu, https://www.w3schools.com/
             <!-- Left Container (contains login,title,logo) -->
             <div class="left-container">
                 <img src="styles/images/uvalogo.png" alt="uvalogo">
-                <div class="title" style="font-family: 'Staatliches', cursive; font-size: 7vw;">Hoos <br> Hanging?</div>
+                <div class="title" style="font-family: 'Passero One', cursive; font-size: 7vw;">Hoos <br> Hanging?</div>
                 <a href="<?php echo $client->createAuthUrl(); ?>"><button title="google-login"></button></a>
                 <?php if(!empty($_SESSION["error"])){echo $_SESSION["error"];}?>
             </div>

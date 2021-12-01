@@ -4,14 +4,12 @@
 <head>
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Joon Kim and Crystal Ho">
-    <meta name="description" content="Dashboard for hangout website">  
     
     <title>Hoos HitchHiking</title>
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,700&family=Passero+One&display=swap" rel="stylesheet">
     <!--Styles-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -34,7 +32,7 @@
 
 <body>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-md navbar-dark sticky-top navbar-light"  style = "font-family: 'Staatliches', cursive;">
+    <nav class="navbar navbar-expand-md navbar-dark sticky-top navbar-light"  style = "font-family: 'Passero One', cursive;">
         <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -46,13 +44,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?=$this->url?>/allposts">All Posts</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?=$this->url?>/faq">FAQ</a>
-                </li>
             </ul>
         </div>
         <div class="mx-auto order-0">
-            <a class="navbar-brand mx-auto" href="index.php">Hoos HitchHiking?</a>
+            <a class="navbar-brand mx-auto" href="index.php">HoosHanging</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -1,6 +1,6 @@
 <?php include("base.php")?>
     <!--All posts section-->
-    <h1 class = "display-4" style = "text-align: center; margin-top: 4vh; margin-bottom: 4vh; font-family: 'Staatliches', cursive;">
+    <h1 class = "display-4" style = "text-align: center; margin-top: 4vh; margin-bottom: 4vh; font-family: 'Passero One', cursive;">
         All posts
     </h1>
 

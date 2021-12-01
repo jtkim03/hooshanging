@@ -1,10 +1,10 @@
 :root {
-    --light: #c2ecf7;
+    --light: #ffeef1;
     --dark: #232D4B; 
     --card_light: white;
     --card_dark:rgb(112, 110, 107);
     --card_text_light: white;
-    --navbar-light: #E57200;
+    --navbar-light: #f7f46e;
     --navbar-dark:#554f3d;
     --footer-text-light: white;
     --footer-text-dark: black;
@@ -13,12 +13,12 @@
 }
 
 html[data-theme = "light"] {
-    --dark: #c2ecf7;
+    --dark: #ffeef1;
     --light:#232D4B; 
     --card_light: rgb(112, 110, 107);
     --card_dark:white;
     --navbar-light: #554f3d;
-    --navbar-dark:#E57200;
+    --navbar-dark:#f7f46e;
     --footer-text-light: black;
     --footer-text-dark: white;
     --footer-light: #554f3d;
@@ -149,5 +149,5 @@ a:hover, a:visited, a:link, a:active
 }
 
 .display-4 {
-    font-family: 'Staatliches', cursive;
+    font-family: 'Passero One', cursive;
 }

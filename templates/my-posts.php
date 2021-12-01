@@ -2,11 +2,11 @@
 ?>
 
     <!--My posts section-->
-    <h1 class = "display-4" style = "text-align: center; margin-top: 4vh; margin-bottom: 4vh; font-family: 'Staatliches', cursive;">
+    <h1 class = "display-4" style = "text-align: center; margin-top: 4vh; margin-bottom: 4vh; font-family: 'Passero One', cursive;">
         My posts
     </h1>
 
-    <div class = "container">
+    <div class = "container" style = "padding-bottom: 200px">
         <div class = "row no-gutters" style = "margin: 40px 0 20px">
             <div class = "row">
                 <?php if(!empty($_SESSION["myposts"])):

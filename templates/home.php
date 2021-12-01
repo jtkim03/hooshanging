@@ -1,15 +1,15 @@
 <?php include("base.php");?>
-    <h1 class = "display-4" style = "text-align: center; margin-top: 4vh; margin-bottom: 4vh; font-family: 'Staatliches', cursive;">
+    <h1 class = "display-4" style = "text-align: center; margin-top: 4vh; margin-bottom: 4vh; font-family: 'Passero One', cursive;">
         Welcome, <?=$_SESSION["name"]?>
     </h1>
     <!--Departing soon featured-->
     <div class="container">
         <div class="row no-gutters" style = "margin: 40px 0 20px">
             <div class = "col-12 col-sm-6 col-md-8">
-                <h1 class = "display-6 light-text" style = "font-family: 'Staatliches', cursive;">Happening soon</h1>
+                <h1 class = "display-6 light-text" style = "font-family: 'Passero One', cursive;">Happening soon</h1>
             </div>
             
-            <div class = "container">
+            <div class = "container" style = "padding-bottom: 200px">
         <div class = "row no-gutters" style = "margin: 40px 0 20px">
             <div class = "row">
                 <?php if(!empty($_SESSION["soonposts"])):
