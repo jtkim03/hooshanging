@@ -44,7 +44,7 @@
                     <a class="nav-link" href="<?=$this->url?>/myposts">My Posts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=$this->url?>/all">All Posts</a>
+                    <a class="nav-link" href="<?=$this->url?>/allposts">All Posts</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?=$this->url?>/faq">FAQ</a>
@@ -95,16 +95,6 @@
                         <label for="contactInfo">Contact</label>
                         <input type="text" class="form-control" value=<?=$_SESSION['contact']?> id="contact" name = "contact" aria-describedby="emailHelp">
                     </div>
-                    <div class="form-group">
-                        <input type="hidden" id="loc" name="loc" value=<?=$_SESSION['loc']?>>
-                        <label for="location">Location</label>
-                        <input type="text" class = "form-control" value=<?=$_SESSION['loc']?> id="loc" name = "loc">
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" id="car_desc" name="car_desc" value=<?=$_SESSION['car_desc']?>>
-                        <label for="car_description">Car Description</label>
-                        <textarea type="text" class="form-control" id="car_desc" name = "car_desc" rows="7"><?=$_SESSION['car_desc']?></textarea>
-                    </div>
                     <a class="btn btn-primary" href="<?=$this->url?>/logout"  role="button">Logout</a>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -115,7 +105,6 @@
             </div>
         </div>
         </div>
-    <!--Searchbar-->
 
     <div id="profileAlert"><?php if(!empty($_SESSION["updateProfile"])){echo $_SESSION["updateProfile"];}?> </div>
 

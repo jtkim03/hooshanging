@@ -16,17 +16,29 @@ class HHController {
             case "updateProfile":
                 $this->updateProfile();
                 break;
-            case "get_mypost":
+            case "myposts":
                 $this->getMyPost();
                 break;
-            case "get_allpost":
-                include("allPostQuery.php");
+            case "allposts":
+                $this->getAllPost();
                 break;
             case "createPost":
                 $this->createPost();
                 break;
+            case "deletePost":
+                $this->deletePost();
+                break;
+            case "filterParty":
+                $this->filterParty();
+                break;
+            case "filterStudy":
+                $this->filterStudy();
+                break;
+            case "filterClubEvent":
+                $this->filterClubEvent();
+                break;
             case "home":
-                include("templates/home.php");
+                $this->getHappeningSoonPost();
                 break;
             case "myposts":
                 include("templates/my-posts.php");
@@ -142,21 +154,17 @@ class HHController {
             
     
     public function updateProfile() {
-        if ($_POST["name"] != "" || $_POST["contact"] != "" || $_POST["loc"] != "" || $_POST["car_desc"] != "" ) {
+        if ($_POST["name"] != "" || $_POST["contact"] != "") {
             $stmt = $this->db->mysqli->prepare("update appuser set
                                 name = ?,
-                                contact = ?,
-                                loc = ?,
-                                car_desc = ?
+                                contact = ?
                                 where email = ?;");
-            $stmt->bind_param("sssss", $_POST["name"], $_POST["contact"], $_POST["loc"], $_POST["car_desc"],$_POST["email"]);
+            $stmt->bind_param("sss", $_POST["name"], $_POST["contact"], $_POST["email"]);
             if ($stmt->execute()) {
                 $_SESSION["updateProfile"] = "<div class='alert alert-success' style = 'margin:0;'><b>Profile successfully updated!</b></div>";
                 $_SESSION["name"] = $_POST["name"];
                 $_SESSION["contact"] = $_POST["contact"];
-                $_SESSION["loc"] = $_POST["loc"];
-                $_SESSION["car_desc"] = $_POST["car_desc"];
-            $stmt->bind_param("sssss", $_POST["name"], $_POST["contact"], $_POST["loc"], $_POST["car_desc"],$_POST["email"]);
+            $stmt->bind_param("sss", $_POST["name"], $_POST["contact"],$_POST["email"]);
             if ($stmt->execute()) {
                 $_SESSION["updateProfile"] = "<script type='text/javascript'>
                 successAlert('profileAlert','Profile sucessfully updated!');;
@@ -172,23 +180,46 @@ class HHController {
     }
 
 }
-    public function getMyPost(){
-        $stmt=$mysqli->prepare("select * from event_description");
-        if(!$stmt->execute()){
-            echo "Error";
+    public function getHappeningSoonPost() {
+        $stmt = $this->db->mysqli->prepare("select * from event_address natural join event_occurance natural join event_description order by event_datetime");
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $data = $res->fetch_all(MYSQLI_ASSOC);
+        if ($data === false) {
+            $_SESSION["soonposts"] = "";
         }
-        $res=$stmt->get_result();
-        $posts=$res->fetch_all(MYSQLI_ASSOC);
-        echo json_encode($posts);
+        else {
+            $_SESSION["soonposts"] = $data;
+        }
+        include("templates/home.php");
     }
-    public function getAllPost(){
-        $data = $this->db->mysqli->query("select * from event_occurance;");
-        if (!isset($data[0])) {
-            die("No posts in the database");
+    public function getMyPost(){
+        $stmt = $this->db->mysqli->prepare("select * from event_description natural join event_address natural join event_occurance where email = ?");
+        $stmt->bind_param("s",$_SESSION["email"]);
+        $stmt->execute();
+        $res=$stmt->get_result();
+        $data=$res->fetch_all(MYSQLI_ASSOC);
+        if ($data === false) {
+            $_SESSION["myposts"] = "";
         }
-        $post=$data[0];
-        header("Content-type: application/json");
-        echo json_encode($post,JSON_PRETTY_PRINT);
+        else {
+            $_SESSION["myposts"] = $data;
+        }
+        include("templates/my-posts.php");
+    }
+    
+    public function getAllPost() {
+        $stmt = $this->db->mysqli->prepare("select * from event_address natural join event_occurance natural join event_description");
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $data = $res->fetch_all(MYSQLI_ASSOC);
+        if ($data === false) {
+            $_SESSION["allposts"] = "";
+        }
+        else {
+            $_SESSION["allposts"] = $data;
+        }
+        include("templates/all.php");
     }
     public function createPost(){
 
@@ -197,11 +228,9 @@ class HHController {
                             'location' => $_POST["location"], 
                             'datetime' => $_POST["datetime"], 
                             'description' => $_POST["description"],
-                            'requestOrOffer' => $_POST['requestOrOffer']
+                            'type' => $_POST['type']
                         );
-        // $data=json_decode(json_encode($post_details),true);
-        // print_r($data);
-        #$this->db->query("insert into event_host (email, host_name) values (?, ?);");
+
         $stmt = $this->db->mysqli->prepare("insert into event_address (host_name, event_address) values (?,?);");
         $stmt->bind_param("ss",$_SESSION["name"],$post_details["location"]);
         $stmt->execute();
@@ -210,22 +239,78 @@ class HHController {
         $stmt->bind_param("ss",$post_details["title"], $post_details["datetime"]);
         $stmt->execute();
 
-        $stmt = $this->db->mysqli->prepare("insert into event_description(title, email, description) values (?,?,?);");
-        $stmt->bind_param("sss",$post_details["title"], $_SESSION["email"], $post_details["description"]);
+        $stmt = $this->db->mysqli->prepare("insert into event_description(title, email, description,type) values (?,?,?,?);");
+        $stmt->bind_param("ssss",$post_details["title"], $_SESSION["email"], $post_details["description"], $_POST["type"]);
         $stmt->execute();
 
         $stmt = $this->db->mysqli->prepare("insert into creates(email) values (?);");
         $stmt->bind_param("s",$post_details["email"]);
+        $stmt->execute();
 
-        if(!$stmt->execute()){
-            echo "Error";
-        }
-        else{
-            echo "updated";
-            header("Location:home");
-        }
-        // header("Content-type: application/json");
-        // echo json_encode($post_details, JSON_PRETTY_PRINT)        
+        header("Location:home");
+
     }
-    
+    public function deletePost() {
+        echo $_GET["event_id"];
+        echo $_GET["title"];
+        $stmt = $this->db->mysqli->prepare("delete from event_address where event_id = ?");
+        $stmt->bind_param("i",$_GET["event_id"]);
+        $stmt->execute();
+
+        $stmt = $this->db->mysqli->prepare("delete from event_occurance where title = ?");
+        $stmt->bind_param("s",$_GET["title"]);
+        $stmt->execute();
+
+        $stmt = $this->db->mysqli->prepare("delete from event_description where title = ?");
+        $stmt->bind_param("s",$_GET["title"]);
+        $stmt->execute();
+
+        $stmt = $this->db->mysqli->prepare("delete from creates where event_id = ?");
+        $stmt->bind_param("i",$_GET["event_id"]);
+        $stmt->execute();
+
+        header("Location: /hooshanging/myposts");
+    }
+
+    public function filterParty() {
+        $stmt = $this->db->mysqli->prepare("select * from (event_address natural join event_occurance natural join event_description) where type = 'party';");
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $data = $res->fetch_all(MYSQLI_ASSOC);
+        if ($data === false) {
+            $_SESSION["allposts"] = "";
+        }
+        else {
+            $_SESSION["allposts"] = $data;
+        }
+        include("templates/all.php");
+    }
+
+    public function filterStudy() {
+        $stmt = $this->db->mysqli->prepare("select * from (event_address natural join event_occurance natural join event_description) where type = 'group';");
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $data = $res->fetch_all(MYSQLI_ASSOC);
+        if ($data === false) {
+            $_SESSION["allposts"] = "";
+        }
+        else {
+            $_SESSION["allposts"] = $data;
+        }
+        include("templates/all.php");
+    }
+
+    public function filterClubEvent() {
+        $stmt = $this->db->mysqli->prepare("select * from (event_address natural join event_occurance natural join event_description) where type = 'club_event';");
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $data = $res->fetch_all(MYSQLI_ASSOC);
+        if ($data === false) {
+            $_SESSION["allposts"] = "";
+        }
+        else {
+            $_SESSION["allposts"] = $data;
+        }
+        include("templates/all.php");
+    }
 }

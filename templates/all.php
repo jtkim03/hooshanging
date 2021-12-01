@@ -3,155 +3,48 @@
     <h1 class = "display-4" style = "text-align: center; margin-top: 4vh; margin-bottom: 4vh; font-family: 'Staatliches', cursive;">
         All posts
     </h1>
-    <div class = "container">
-    <table class="table table-hover" id=allpost_table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Location</th>
-                <th>Date and Time</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-            <tbody id="mypost_data">
-            </tbody> 
-    </table> 
-    </div>
-    <div class="container" id=allpost_row>
-        <div class="row no-gutters" style = "margin: 40px 0 20px">
-          </div>
-            <div class="row">
+
+    <div class = "container" style = "padding-bottom: 200px">
+        <div class = "row no-gutters" style = "margin: 40px 0 30px">
+        <div class = "row" style = "display: inline-block; margin-bottom: 50px">
+            <a href="<?=$this->url?>/filterParty">
+                <button type="button" class="btn btn-info" style = "width: 120px; margin: 7px">Party</button>
+            </a>
+            <a href="<?=$this->url?>/filterStudy">
+                <button type="button" class="btn btn-info" style = "width: 120px; margin: 7px">Study Group</button>
+            </a>
+            <a href="<?=$this->url?>/filterClubEvent">
+                <button type="button" class="btn btn-info" style = "width: 120px; margin: 7px">Club Event</button>
+            </a>
+        </div>
+            <div class = "row">
+                <?php if(!empty($_SESSION["allposts"])):
+                    foreach($_SESSION["allposts"] as $i):
+                        $date = date_create($i["event_datetime"]);
+                        $date = $date->format('m/d/Y, H:i:s');
+                ?>
                 <div class="col-lg-3 col-md-6 col-12 d-flex align-items-stretch" style="margin-bottom:10px;">
-                    <div class="card card-default">
-                        <img class="card-img-top" src="styles/images/uva-afc.jpg" alt="Card image cap">
+                    <div class="card card-default border-0">
                         <div class="card-body card-bg-light">
-                            <h5 class="card-title">Aquatic Fitness Center</h5>
-                            <p>Date: 10/5/2021</p>
-                            <p>Departure Time: 11:00 AM</p>
-                            <p class="card-text">Heading to the AFC to workout, anyone can hitch a ride!</p>
-                            <a  class="stretched-link" data-toggle="modal" data-target="#detailModal"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 d-flex align-items-stretch" style="margin-bottom:10px;">
-                    <div class="card card-default">
-                        <img class="card-img-top" src="styles/images/barracks.jpg" alt="Card image cap">
-                        <div class="card-body card-bg-light">
-                            <h5 class="card-title">Barracks</h5>
-                            <p>Date: 9/28/2021</p>
-                            <p>Time: 11:00 AM</p>
-                            <p class="card-text">We are going to barracks if you want to get anything there! We request
-                                a small fee of $2 for gas :)
-                            </p>
-                            <a type="hidden" class="stretched-link" data-toggle="modal" data-target="#detailModal"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 d-flex align-items-stretch" style="margin-bottom:10px;">
-                    <div class="card card-default">
-                        <img class="card-img-top" src="styles/images/Ohill.jpg" alt="Card image cap">
-                        <div class="card-body card-bg-light">
-                            <h5 class="card-title">Ohill</h5>
-                            <p>Date: 9/28/2021</p>
-                            <p>Time: 1:00 PM</p>
-                            <p class="card-text">We are going to OHill to get some food. Feel free to hitch a ride if you wanna be any
-                                where neat that area!
-                            </p>
+                            <h5 class="card-title"><?=$i['title']?></h5>
+                            <p>Date: <?=$date?></p> 
+                            <p>Location: <?=$i["event_address"]?></p>
+                            <p class="card-text"><?=$i["description"]?></p>
                             <a class="stretched-link" data-toggle="modal" data-target="#detailModal"></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-12 d-flex align-items-stretch" style="margin-bottom:10px;">
-                    <div class="card card-default">
-                        <img class="card-img-top" src="styles/images/uva-lawn.jpg" alt="Card image cap">
-                        <div class="card-body card-bg-light">
-                            <h5 class="card-title">The Lawn</h5>
-                            <p>Date: 9/28/2021</p>
-                            <p>Time: 1:00 PM</p>
-                            <p class="card-text">We are going to the lawn. Rides are free!
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; endif;?>
             </div>
-            <!--RSVP-->
-            <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="detailModalLabel">Post Details</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                    </div>
-                    <div class="modal-body">
-                        <h5>Contact Info</h5>
-                        <p>Phone: xxx-xxx-xxxx</p>
-                        <p>Email: xxx-xxx-xxxx</p>
-                        <hr>
-                        <h5>Description</h5>
-                        <p>Description goes here</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-12 d-flex align-items-stretch" style="margin-bottom:10px;">
-                            <div class="card card-default">
-                                <img class="card-img-top" src="styles/images/uva-afc.jpg" alt="Card image cap">
-                                <div class="card-body card-bg-light">
-                                    <h5 class="card-title">Aquatic Fitness Center</h5>
-                                    <p>Date: 10/5/2021</p>
-                                    <p>Departure Time: 11:00 AM</p>
-                                    <p class="card-text">Heading to the AFC to workout, anyone can hitch a ride!</p>
-                                    <a  class="stretched-link" data-toggle="modal" data-target="#detailModal"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-12 d-flex align-items-stretch" style="margin-bottom:10px;">
-                            <div class="card card-default">
-                                <img class="card-img-top" src="styles/images/uva-afc.jpg" alt="Card image cap">
-                                <div class="card-body card-bg-light">
-                                    <h5 class="card-title">Aquatic Fitness Center</h5>
-                                    <p>Date: 10/5/2021</p>
-                                    <p>Departure Time: 11:00 AM</p>
-                                    <p class="card-text">Heading to the AFC to workout, anyone can hitch a ride!</p>
-                                    <a class="stretched-link" data-toggle="modal" data-target="#detailModal"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-12 d-flex align-items-stretch" style="margin-bottom:10px;">
-                            <div class="card card-default">
-                                <img class="card-img-top" src="styles/images/uva-afc.jpg" alt="Card image cap">
-                                <div class="card-body card-bg-light">
-                                    <h5 class="card-title">Aquatic Fitness Center</h5>
-                                    <p>Date: 10/5/2021</p>
-                                    <p>Departure Time: 11:00 AM</p>
-                                    <p class="card-text">Heading to the AFC to workout, anyone can hitch a ride!</p>
-                                    <a  class="stretched-link" data-toggle="modal" data-target="#detailModal"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-12 d-flex align-items-stretch" style="margin-bottom:10px;">
-                            <div class="card card-default">
-                                <img class="card-img-top" src="styles/images/uva-afc.jpg" alt="Card image cap">
-                                <div class="card-body card-bg-light">
-                                    <h5 class="card-title">Aquatic Fitness Center</h5>
-                                    <p>Date: 10/5/2021</p>
-                                    <p>Departure Time: 11:00 AM</p>
-                                    <p class="card-text">Heading to the AFC to workout, anyone can hitch a ride!</p>
-                                    <a  class="stretched-link" data-toggle="modal" data-target="#detailModal"></a>
-                                </div>
-                            </div>
-                    </div>
-                    </div>
-    </div>
-    </div>
+                
+
+
+
+
+
     <script>
     const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric" }

@@ -34,6 +34,7 @@
       title varchar(40) not null,
       email varchar(20) not null,
       description text,
+      type varchar(15),
       primary key(title));");
 
     $db->query("drop table if exists party;");
@@ -61,6 +62,7 @@
     $db->query("create table appUser (
         email varchar(20),
         name varchar(15),
+        contact varchar(15),
         primary key (email)
     );");
 
@@ -102,16 +104,5 @@
         primary key (email)
     );");
 
-
-    $db->query("drop table if exists event;");
-    $db->query("create table event (
-        id int not null auto_increment,
-        email varchar(20),
-        poster varchar(25) not null,
-        destination text not null,
-        datetime text not null,
-        description text not null,
-        type text not null,
-        primary key (id));");
 
 ?>

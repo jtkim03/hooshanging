@@ -1,6 +1,6 @@
 <?php include("base.php")?>
 <!--Create Post form-->
-<body onload = "prefillForm()" onunload = "autosaveForm()">
+<body>
     <h1 class = "display-4" style = "text-align: center; margin-top: 4vh; margin-bottom: 4vh;">
         Create a Post
     </h1>
@@ -8,17 +8,17 @@
     <div class = "container">
         <div class="row justify-content-md-center">
             <div class="col col-lg-6">
-                <form action = "<?=$this->url?>/createPost" method = "post" onsubmit="return validatePost()">
+                <form action = "<?=$this->url?>/createPost" method = "post">
                 <div class = "row" style = "text-align: center;">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" style = "text-align: center;">
                         <label class="btn btn-secondary active">
-                            <input type="radio" name="requestOrOffer" id="request" value ="request" autocomplete="off" checked> Party
+                            <input type="radio" name="type" id="party" value ="party" autocomplete="off" checked> Party
                         </label>
                         <label class="btn btn-secondary">
-                            <input type="radio" name="requestOrOffer" id="offer" value ="offer" autocomplete="off"> Study Group
+                            <input type="radio" name="type" id="group" value ="group" autocomplete="off"> Study Group
                         </label>
                         <label class="btn btn-secondary">
-                            <input type="radio" name="requestOrOffer" id="offer" value ="offer" autocomplete="off"> Club Event
+                            <input type="radio" name="type" id="club_event" value ="club_event" autocomplete="off"> Club Event
                         </label>
                     </div>
                     </div>
@@ -51,17 +51,6 @@
 
 <script type = "text/javascript">
 
-    document.getElementById('destination').onblur = () => {
-        console.log('ee');
-        var destination = document.getElementById('destination').value;
-        var destHelp = document.getElementById('destinationHelp');
-        if(destination.length<3){
-            destHelp.textContent = "Please be more specific";
-        }
-        else {
-            destHelp.textContent = "";
-        }
-    }
     //Set minimum time
     var today = new Date().toISOString().split('T')[0];
     var time=new Date().toISOString().split('T')[1];
@@ -75,20 +64,4 @@
         this.type = type;
     }
 
-    function autosaveForm() {
-        var destination = document.getElementById('destination').value;
-        var description = document.getElementById("description").value;
-        var datetime = document.getElementById("datetime").value;
-        var type = document.querySelector('input[name="requestOrOffer"]:checked').value;
-        var post = new Post(destination, description, datetime, type);
-        localStorage.setItem("savedPost", JSON.stringify(post));
-    }
-
-    function prefillForm() {
-        var savedPost = localStorage.getItem("savedPost");
-        savedPost = JSON.parse(savedPost);
-        document.getElementById("destination").value = savedPost.destination;
-        document.getElementById("description").value = savedPost.description;
-        document.getElementById("datetime").value = savedPost.datetime;
-    }
 </script>
