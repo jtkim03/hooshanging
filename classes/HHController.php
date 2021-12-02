@@ -70,7 +70,6 @@ class HHController {
     }
 
     public function signin() {
-            // our login code from index.php last time!
             $error_msg = ""; 
             require 'google-api/vendor/autoload.php';
            
@@ -104,7 +103,7 @@ class HHController {
                 //check if UVA Student
                 $regex="<[a-z][a-z][a-z]?[0-9][a-z][a-z]?[a-z]?@virginia.edu>";
                 if(preg_match($regex,$email)){
-                                // checking user already exists or not
+                    // checking user already exists or not
                     $get_user = mysqli_query($db_connection, "SELECT `email` FROM `appuser` WHERE `email`='$email'");
                     if(mysqli_num_rows($get_user) > 0){
                         //retrieve user data

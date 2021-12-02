@@ -17,7 +17,6 @@
       event_id int not null auto_increment,
       host_name varchar(20),
       event_address varchar(40) not null,
-      creation_date datetime default current_timestamp,
       primary key (event_id)
     );");
 
@@ -58,10 +57,10 @@
       primary key (event_id)
     );");
 
-    $db->query("drop table if exists appUser;");
-    $db->query("create table appUser (
+    $db->query("drop table if exists appuser;");
+    $db->query("create table appuser (
         email varchar(20),
-        name varchar(15),
+        name varchar(30),
         contact varchar(15),
         primary key (email)
     );");
@@ -77,7 +76,6 @@
     $db->query("create table creates (
         event_id int not null auto_increment references event_address(event_id),
         email varchar(20) not null,
-        creation_date datetime default current_timestamp,
         primary key (event_id)
     );");
 
@@ -85,7 +83,6 @@
     $db->query("create table registers (
         event_id int not null auto_increment references event_address(event_id),
         email varchar(20) not null,
-        registration_date datetime default current_timestamp,
         primary key (event_id)
     );");
 
@@ -93,7 +90,6 @@
     $db->query("create table modify (
         event_id int not null auto_increment references event_address(event_id),
         email varchar(20) not null,
-        modification_date datetime default current_timestamp,
         primary key (event_id)
     );");
 

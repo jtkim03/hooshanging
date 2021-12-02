@@ -28,13 +28,10 @@
                 <a href="<?=$this->url?>/home" class="text-reset">Home</a>
             </p>
             <p>
-                <a href="<?=$this->url?>/mypost" class="text-reset">My Posts</a>
+                <a href="<?=$this->url?>/myposts" class="text-reset">My Posts</a>
             </p>
             <p>
                 <a href="<?=$this->url?>/all" class="text-reset">All Posts</a>
-            </p>
-            <p>
-                <a href="<?=$this->url?>/faq" class="text-reset">FAQ</a>
             </p>
         </div>
         <!-- Grid column -->
