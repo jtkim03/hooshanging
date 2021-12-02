@@ -61,7 +61,7 @@
     $db->query("drop table if exists appUser;");
     $db->query("create table appUser (
         email varchar(20),
-        name varchar(15),
+        name varchar(30),
         contact varchar(15),
         primary key (email)
     );");
