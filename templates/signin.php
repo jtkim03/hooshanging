@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<!--
-Sources used: https://cs4640.cs.virginia.edu, https://www.w3schools.com/
--->
 <html lang="en">
     <head>
         <title>Hoos HitchHiking</title>
@@ -17,7 +14,6 @@ Sources used: https://cs4640.cs.virginia.edu, https://www.w3schools.com/
     <body>
         <!-- Flexbox container -->
         <div class=container>
-            <!-- Left Container (contains login,title,logo) -->
             <div class="left-container">
                 <img src="styles/images/uvalogo.png" alt="uvalogo">
                 <div class="title" style="font-family: 'Passero One', cursive; font-size: 7vw;">Hoos <br> Hanging?</div>
